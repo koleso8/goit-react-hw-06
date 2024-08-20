@@ -11,12 +11,12 @@ export const ContactList = () => {
   return (
     <ul className={clsx(s.list)}>
       {contacts
+        .filter(item => item.name.toLowerCase().includes(filter.toLowerCase()))
         .map(({ id, name, number }) => (
           <li key={id} className={clsx(s.card)}>
             <Contact id={id} name={name} number={number} />
           </li>
-        ))
-        .filter(item => item.name.toLowerCase().includes(filter.toLowerCase()))}
+        ))}
     </ul>
   );
 };
