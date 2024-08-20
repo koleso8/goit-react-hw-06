@@ -2,11 +2,11 @@ import clsx from 'clsx';
 import Contact from '../Contact/Contact';
 import s from './ContactList.module.css';
 import { useSelector } from 'react-redux';
-import { selectContacts, selectFilters } from '../../redux/selecrors';
+import { selectContacts, selectNameFilter } from '../../redux/selecrors';
 
 export const ContactList = () => {
   const contacts = useSelector(selectContacts);
-  const filter = useSelector(selectFilters);
+  const filter = useSelector(selectNameFilter);
 
   return (
     <ul className={clsx(s.list)}>
