@@ -4,18 +4,27 @@ import { useId } from 'react';
 import s from '../ContactForm/ContactForm.module.css';
 import { FaPhone, FaUser } from 'react-icons/fa';
 import { contactSchema } from '../../helpers/contactSchema';
+import { cancelEdit } from '../../redux/editSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCurrent } from '../../redux/selecrors';
+import { chengeContact } from '../../redux/contactsSlice';
 
-export const ChengeForm = ({ onCancel, handleEdit, initialValues }) => {
+export const ChengeForm = () => {
   const nameFieldId = useId();
   const numberFieldId = useId();
 
+  const dispatch = useDispatch();
+
   const onSubmit = (value, action) => {
-    handleEdit(value);
+    dispatch(chengeContact(value));
+    dispatch(cancelEdit());
     action.resetForm();
   };
+
   return (
     <Formik
-      initialValues={initialValues}
+      enableReinitialize
+      initialValues={useSelector(selectCurrent)}
       validationSchema={contactSchema}
       onSubmit={onSubmit}
     >
@@ -49,7 +58,7 @@ export const ChengeForm = ({ onCancel, handleEdit, initialValues }) => {
         <button
           className={clsx(s.oauthButton)}
           type="button"
-          onClick={onCancel}
+          onClick={() => dispatch(cancelEdit())}
         >
           Cancel
         </button>

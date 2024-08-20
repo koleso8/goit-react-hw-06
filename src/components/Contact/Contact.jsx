@@ -3,11 +3,22 @@ import { FaUser } from 'react-icons/fa';
 import { FaPhoneAlt } from 'react-icons/fa';
 import { FaPencilAlt } from 'react-icons/fa';
 import s from './Contact.module.css';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from '../../redux/contactsSlice';
+import { onEdit } from '../../redux/editSlice';
 
-const Contact = ({ id, name, number, onDelete, onEdit }) => {
+const Contact = ({ id, name, number }) => {
+  const dispatch = useDispatch();
+  const card = { id, name, number };
+
   return (
     <>
-      <button className={clsx(s.edit)} onClick={() => onEdit(id, name, number)}>
+      <button
+        className={clsx(s.edit)}
+        onClick={() => {
+          dispatch(onEdit(card));
+        }}
+      >
         <FaPencilAlt />
       </button>
       <p className={clsx(s.card__title)}>
@@ -21,7 +32,7 @@ const Contact = ({ id, name, number, onDelete, onEdit }) => {
       <button
         className={clsx(s.signUp)}
         type="button"
-        onClick={() => onDelete(id)}
+        onClick={() => dispatch(deleteContact(id))}
       >
         Delete
       </button>

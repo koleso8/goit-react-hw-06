@@ -1,21 +1,22 @@
 import clsx from 'clsx';
 import Contact from '../Contact/Contact';
 import s from './ContactList.module.css';
+import { useSelector } from 'react-redux';
+import { selectContacts, selectFilters } from '../../redux/selecrors';
 
-export const ContactList = ({ contacts, onDelete, onEdit }) => {
+export const ContactList = () => {
+  const contacts = useSelector(selectContacts);
+  const filter = useSelector(selectFilters);
+
   return (
     <ul className={clsx(s.list)}>
-      {contacts.map(({ id, name, number }) => (
-        <li key={id} className={clsx(s.card)}>
-          <Contact
-            id={id}
-            name={name}
-            number={number}
-            onDelete={onDelete}
-            onEdit={onEdit}
-          />
-        </li>
-      ))}
+      {contacts
+        .filter(item => item.name.toLowerCase().includes(filter.toLowerCase()))
+        .map(({ id, name, number }) => (
+          <li key={id} className={clsx(s.card)}>
+            <Contact id={id} name={name} number={number} />
+          </li>
+        ))}
     </ul>
   );
 };

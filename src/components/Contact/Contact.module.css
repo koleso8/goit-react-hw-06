@@ -6,7 +6,7 @@
   margin-bottom: 10px;
   display: block;
   border-bottom: 2px solid #000;
-  width: 100%; /* or any other percentage or pixel value */
+  width: 100%;
 }
 .card__subtitle {
   font-size: 20px;
@@ -43,14 +43,14 @@
 .iconNumber {
   color: #333;
   position: absolute;
-  left: 5px;
+  left: 7px;
   width: 15px;
 }
 .iconUser {
   width: 15px;
   color: #333;
   position: absolute;
-  left: 5px;
+  left: 7px;
   top: 40px;
 }
 
