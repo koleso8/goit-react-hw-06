@@ -1,12 +1,14 @@
 import clsx from 'clsx';
 import { FaSearch } from 'react-icons/fa';
 import { useId } from 'react';
-import s from '../ContactForm/ContactForm.module.css';
+import { selectNameFilter } from '../../redux/selecrors';
 import { changeFilter } from '../../redux/filtersSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import s from '../ContactForm/ContactForm.module.css';
 
 export const SearchBox = () => {
   const searchInputId = useId();
+  const search = useSelector(selectNameFilter);
 
   const dispatch = useDispatch();
 
@@ -21,8 +23,16 @@ export const SearchBox = () => {
         type="text"
         name="search"
         id={searchInputId}
+        value={search}
         onChange={e => dispatch(changeFilter(e.target.value))}
       />
+      <button
+        className={clsx(s.oauthButton)}
+        type="reset"
+        onClick={() => dispatch(changeFilter(''))}
+      >
+        reset
+      </button>
     </div>
   );
 };

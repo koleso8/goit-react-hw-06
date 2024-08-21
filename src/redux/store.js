@@ -14,21 +14,24 @@ import storage from 'redux-persist/lib/storage';
 import { contactsReducer } from './contactsSlice';
 import { filtersReducer } from './filtersSlice';
 import { editingReducer } from './editSlice';
+import { favoriteReducer } from './favoriteSlice';
 
 const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  whiteList: ['contacts'],
+  whiteList: ['contacts', 'favorite'],
 };
 
 const persistedReducer = persistReducer(persistConfig, contactsReducer);
+const persistedReducerFav = persistReducer(persistConfig, favoriteReducer);
 
 export const store = configureStore({
   reducer: {
     contacts: persistedReducer,
     filters: filtersReducer,
     editing: editingReducer,
+    favorite: persistedReducerFav,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

@@ -1,23 +1,19 @@
 import './App.css';
-import { useState } from 'react';
 import { ContactList, ChengeForm, SearchBox, ContactForm } from 'components';
 import { useSelector } from 'react-redux';
-import { selectEdit } from './redux/selecrors';
+import {
+  selectContacts,
+  selectEdit,
+  selectFavorite,
+  selectIsFavorite,
+} from './redux/selecrors';
+import Toggle from './components/Toggle/Toggle';
 
 const App = () => {
   const isEdit = useSelector(selectEdit);
-
-  //  const cancelEdit = () => setIsEdit(false);
-
-  // const editing = contact => {
-  //   setContacts(prev =>
-  //     prev.map(item =>
-  //       item.id === changeContact.id ? { ...contact, id: item.id } : item
-  //     )
-  //   );
-
-  //   cancelEdit();
-  // };
+  const isFavorite = useSelector(selectIsFavorite);
+  const contacts = useSelector(selectContacts);
+  const favorite = useSelector(selectFavorite);
 
   return (
     <div className="wrapper">
@@ -25,8 +21,9 @@ const App = () => {
       <section className="tools">
         {isEdit ? <ChengeForm /> : <ContactForm />}
         <SearchBox />
+        <Toggle />
       </section>
-      <ContactList />
+      <ContactList contacts={isFavorite ? favorite : contacts} />
     </div>
   );
 };
