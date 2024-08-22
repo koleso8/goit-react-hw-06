@@ -20,8 +20,10 @@ const App = () => {
       <h1 className="title">Phonebook</h1>
       <section className="tools">
         {isEdit ? <ChengeForm /> : <ContactForm />}
-        <SearchBox />
-        <Toggle />
+        <div className="util">
+          <SearchBox />
+          <Toggle />
+        </div>
       </section>
       <ContactList contacts={isFavorite ? favorite : contacts} />
     </div>
