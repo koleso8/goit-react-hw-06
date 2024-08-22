@@ -13,6 +13,7 @@
     "@dicebear/collection": "^9.2.1",
     "@dicebear/core": "^9.2.1",
     "@reduxjs/toolkit": "^2.2.7",
+    "axios": "^1.7.4",
     "clsx": "^2.1.1",
     "formik": "^2.4.6",
     "nanoid": "^5.0.7",
